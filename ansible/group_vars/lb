@@ -1,0 +1,10 @@
+nginx_config:
+  proxy:
+    name: vm1vm2
+    tmpl: proxy.j2
+    backend_port: 5000
+    backend_group: website
+    virhost: localhost
+
+check_port:
+  - { port: 80 }

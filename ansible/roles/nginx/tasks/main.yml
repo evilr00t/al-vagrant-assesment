@@ -1,5 +1,10 @@
 - name: Install nginx
   apt: name=nginx state=installed update_cache=True
+  register: install_nginx
+
+- name: Disable default vhost
+  file: path=/etc/nginx/sites-enabled/default state=absent
+  when: install_nginx.changed
 
 - name: Check config and restart nginx if needed
   when: nginx_config is defined
@@ -16,4 +21,3 @@
   wait_for: port={{ item.port }} host={{ item.host | default('localhost') }}
   with_items: '{{check_port}}' 
 
-  
