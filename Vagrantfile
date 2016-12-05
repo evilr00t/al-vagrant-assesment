@@ -63,9 +63,14 @@ Vagrant.configure("2") do |config|
   # Enable provisioning with a shell script. Additional provisioners such as
   # Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the
   # documentation for more information about their specific syntax and use.
-  config.ssh.insert_key = false
+ 
+ 	config.ssh.insert_key = false
+	config.vm.provision "file",  source: "pubkey", destination: "/home/vagrant/.ssh/pubkey.pub"
+  config.vm.provision "shell", inline: "cat /home/vagrant/.ssh/pubkey.pub >> /home/vagrant/.ssh/authorized_keys"
+	#config.ssh.public_key_path = "pubkey"
+	#config.ssh.private_key_path = "privkey"
 
- ['1','2'].each do |number|
+ 	['1','2'].each do |number|
     config.vm.define "vm#{number}" do |vm|
       vm.vm.network "private_network", ip: "10.0.0.20#{number}"
       vm.vm.synced_folder "website", "/app"
@@ -87,7 +92,7 @@ config.vm.define "lb1" do |lb|
 
    lb.vm.provision :ansible_local do |ansible|
       ansible.playbook       = "/ansible/playbook.yml"
-      ansible.verbose        = 'vvvv'
+      ansible.verbose        = 'v'
 #      ansible.install        = true
       ansible.limit          = "all" # or only "nodes" group, etc.
       ansible.inventory_path = "inventory"
