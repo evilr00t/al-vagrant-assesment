@@ -1,0 +1,109 @@
+2016-12-04 15:27:01,252 p=7424 u=vagrant |   [WARNING]: Optional dependency 'cryptography' raised an exception, falling back to 'Crypto'
+
+2016-12-04 15:27:01,538 p=7424 u=vagrant |  PLAY [all] *********************************************************************
+2016-12-04 15:27:01,561 p=7424 u=vagrant |  TASK [setup] *******************************************************************
+2016-12-04 15:27:02,402 p=7424 u=vagrant |  ok: [local]
+2016-12-04 15:27:02,634 p=7424 u=vagrant |  ok: [vm1]
+2016-12-04 15:27:02,642 p=7424 u=vagrant |  ok: [vm2]
+2016-12-04 15:27:02,655 p=7424 u=vagrant |  TASK [sudo : Reconfigure /etc/sudoers based on host_vars/group_vars] ***********
+2016-12-04 15:27:03,308 p=7424 u=vagrant |  fatal: [local]: FAILED! => {"changed": true, "failed": true, "msg": "Destination /etc not writable"}
+2016-12-04 15:27:03,338 p=7424 u=vagrant |  fatal: [vm1]: FAILED! => {"changed": true, "failed": true, "msg": "Destination /etc not writable"}
+2016-12-04 15:27:03,341 p=7424 u=vagrant |  fatal: [vm2]: FAILED! => {"changed": true, "failed": true, "msg": "Destination /etc not writable"}
+2016-12-04 15:27:03,348 p=7424 u=vagrant |  NO MORE HOSTS LEFT *************************************************************
+2016-12-04 15:27:03,352 p=7424 u=vagrant |  	to retry, use: --limit @/ansible/playbook.retry
+
+2016-12-04 15:27:03,353 p=7424 u=vagrant |  PLAY RECAP *********************************************************************
+2016-12-04 15:27:03,354 p=7424 u=vagrant |  local                      : ok=1    changed=0    unreachable=0    failed=1   
+2016-12-04 15:27:03,355 p=7424 u=vagrant |  vm1                        : ok=1    changed=0    unreachable=0    failed=1   
+2016-12-04 15:27:03,356 p=7424 u=vagrant |  vm2                        : ok=1    changed=0    unreachable=0    failed=1   
+2016-12-04 15:27:17,040 p=7573 u=vagrant |   [WARNING]: Optional dependency 'cryptography' raised an exception, falling back to 'Crypto'
+
+2016-12-04 15:27:17,376 p=7573 u=vagrant |  PLAY [all] *********************************************************************
+2016-12-04 15:27:17,406 p=7573 u=vagrant |  TASK [setup] *******************************************************************
+2016-12-04 15:27:18,537 p=7573 u=vagrant |  ok: [vm1]
+2016-12-04 15:27:18,547 p=7573 u=vagrant |  ok: [vm2]
+2016-12-04 15:27:18,603 p=7573 u=vagrant |  ok: [local]
+2016-12-04 15:27:18,625 p=7573 u=vagrant |  TASK [sudo : Reconfigure /etc/sudoers based on host_vars/group_vars] ***********
+2016-12-04 15:27:19,533 p=7573 u=vagrant |  ok: [local]
+2016-12-04 15:27:19,564 p=7573 u=vagrant |  changed: [vm1]
+2016-12-04 15:27:19,567 p=7573 u=vagrant |  changed: [vm2]
+2016-12-04 15:27:19,604 p=7573 u=vagrant |  PLAY [lb] **********************************************************************
+2016-12-04 15:27:19,638 p=7573 u=vagrant |  TASK [setup] *******************************************************************
+2016-12-04 15:27:20,256 p=7573 u=vagrant |  ok: [local]
+2016-12-04 15:27:20,268 p=7573 u=vagrant |  TASK [nginx : Install nginx] ***************************************************
+2016-12-04 15:27:29,653 p=7573 u=vagrant |  ok: [local]
+2016-12-04 15:27:29,663 p=7573 u=vagrant |  TASK [nginx : Check config and restart nginx if needed] ************************
+2016-12-04 15:27:29,921 p=7573 u=vagrant |  ok: [local] => (item={'value': {u'tmpl': u'website-backend.j2', u'backend_port': 5000, u'virhost': u'localhost', u'listen_ip': u'default_server', u'backend_host': u'localhost'}, 'key': u'default'})
+2016-12-04 15:27:29,935 p=7573 u=vagrant |  TASK [nginx : Restart nginx] ***************************************************
+2016-12-04 15:27:29,963 p=7573 u=vagrant |  skipping: [local]
+2016-12-04 15:27:29,974 p=7573 u=vagrant |  TASK [nginx : Check that defined ports are listening] **************************
+2016-12-04 15:27:30,224 p=7573 u=vagrant |  ok: [local] => (item={u'port': 80})
+2016-12-04 15:27:30,242 p=7573 u=vagrant |  PLAY [website] *****************************************************************
+2016-12-04 15:27:30,263 p=7573 u=vagrant |  TASK [setup] *******************************************************************
+2016-12-04 15:27:30,930 p=7573 u=vagrant |  ok: [vm1]
+2016-12-04 15:27:30,933 p=7573 u=vagrant |  ok: [vm2]
+2016-12-04 15:27:30,945 p=7573 u=vagrant |  TASK [nginx : Install nginx] ***************************************************
+2016-12-04 15:28:01,439 p=7573 u=vagrant |  changed: [vm2]
+2016-12-04 15:28:11,452 p=7573 u=vagrant |  changed: [vm1]
+2016-12-04 15:28:11,479 p=7573 u=vagrant |  TASK [nginx : Check config and restart nginx if needed] ************************
+2016-12-04 15:28:12,180 p=7573 u=vagrant |  changed: [vm1] => (item={'value': {u'tmpl': u'website-backend.j2', u'backend_port': 5000, u'virhost': u'localhost', u'listen_ip': u'default_server', u'backend_host': u'localhost'}, 'key': u'default'})
+2016-12-04 15:28:12,208 p=7573 u=vagrant |  changed: [vm2] => (item={'value': {u'tmpl': u'website-backend.j2', u'backend_port': 5000, u'virhost': u'localhost', u'listen_ip': u'default_server', u'backend_host': u'localhost'}, 'key': u'default'})
+2016-12-04 15:28:12,227 p=7573 u=vagrant |  TASK [nginx : Restart nginx] ***************************************************
+2016-12-04 15:28:13,850 p=7573 u=vagrant |  changed: [vm1]
+2016-12-04 15:28:13,864 p=7573 u=vagrant |  changed: [vm2]
+2016-12-04 15:28:13,877 p=7573 u=vagrant |  TASK [nginx : Check that defined ports are listening] **************************
+2016-12-04 15:28:14,372 p=7573 u=vagrant |  ok: [vm2] => (item={u'port': 80})
+2016-12-04 15:28:14,385 p=7573 u=vagrant |  ok: [vm1] => (item={u'port': 80})
+2016-12-04 15:28:14,400 p=7573 u=vagrant |  TASK [supervisor : Install supervisor] *****************************************
+2016-12-04 15:28:21,617 p=7573 u=vagrant |  changed: [vm2]
+2016-12-04 15:28:21,622 p=7573 u=vagrant |  changed: [vm1]
+2016-12-04 15:28:21,643 p=7573 u=vagrant |  TASK [supervisor : Configure supervisor] ***************************************
+2016-12-04 15:28:21,665 p=7573 u=vagrant |  [DEPRECATION WARNING]: Using bare variables is deprecated. Update your playbooks so that the environment value uses the full variable syntax 
+('{{supervisord}}').
+This feature will be removed in a future release. Deprecation warnings can be disabled by setting 
+deprecation_warnings=False in ansible.cfg.
+2016-12-04 15:28:21,696 p=7573 u=vagrant |  [DEPRECATION WARNING]: Using bare variables is deprecated. Update your playbooks so that the environment value uses the full variable syntax 
+('{{supervisord}}').
+This feature will be removed in a future release. Deprecation warnings can be disabled by setting 
+deprecation_warnings=False in ansible.cfg.
+2016-12-04 15:28:22,467 p=7573 u=vagrant |  changed: [vm1] => (item={'value': {u'user': u'vagrant', u'host': u'0.0.0.0', u'name': u'random-xkcd', u'dir': u'/app/', u'port': 5000}, 'key': u'flask-app'})
+2016-12-04 15:28:22,496 p=7573 u=vagrant |  changed: [vm2] => (item={'value': {u'user': u'vagrant', u'host': u'0.0.0.0', u'name': u'random-xkcd', u'dir': u'/app/', u'port': 5000}, 'key': u'flask-app'})
+2016-12-04 15:28:22,513 p=7573 u=vagrant |  TASK [webapp : install python-pip] *********************************************
+2016-12-04 15:28:56,804 p=7573 u=vagrant |  changed: [vm1]
+2016-12-04 15:28:57,326 p=7573 u=vagrant |  changed: [vm2]
+2016-12-04 15:28:57,338 p=7573 u=vagrant |  TASK [webapp : install webapp dependencies] ************************************
+2016-12-04 15:29:01,386 p=7573 u=vagrant |  changed: [vm2]
+2016-12-04 15:29:01,501 p=7573 u=vagrant |  changed: [vm1]
+2016-12-04 15:29:01,515 p=7573 u=vagrant |  TASK [webapp : reload supervisord] *********************************************
+2016-12-04 15:29:02,126 p=7573 u=vagrant |  changed: [vm2]
+2016-12-04 15:29:02,130 p=7573 u=vagrant |  changed: [vm1]
+2016-12-04 15:29:02,144 p=7573 u=vagrant |  TASK [webapp : wait 5 seconds... (to respawn processess)] **********************
+2016-12-04 15:29:02,173 p=7573 u=vagrant |  Pausing for 5 seconds
+2016-12-04 15:29:02,174 p=7573 u=vagrant |  (ctrl+C then 'C' = continue early, ctrl+C then 'A' = abort)
+2016-12-04 15:29:07,184 p=7573 u=vagrant |  ok: [vm1]
+2016-12-04 15:29:07,194 p=7573 u=vagrant |  TASK [webapp : Register content for checks] ************************************
+2016-12-04 15:29:07,216 p=7573 u=vagrant |  [DEPRECATION WARNING]: Using bare variables is deprecated. Update your playbooks so that the environment value uses the full variable syntax 
+('{{content_check}}').
+This feature will be removed in a future release. Deprecation warnings can be disabled by setting 
+deprecation_warnings=False in ansible.cfg.
+2016-12-04 15:29:07,236 p=7573 u=vagrant |  [DEPRECATION WARNING]: Using bare variables is deprecated. Update your playbooks so that the environment value uses the full variable syntax 
+('{{content_check}}').
+This feature will be removed in a future release. Deprecation warnings can be disabled by setting 
+deprecation_warnings=False in ansible.cfg.
+2016-12-04 15:29:08,067 p=7573 u=vagrant |  ok: [vm1] => (item={u'host': u'localhost', u'cont': u'<img src'})
+2016-12-04 15:29:08,127 p=7573 u=vagrant |  ok: [vm2] => (item={u'host': u'localhost', u'cont': u'<img src'})
+2016-12-04 15:29:08,144 p=7573 u=vagrant |  TASK [webapp : Fail if condition is not in the page content] *******************
+2016-12-04 15:29:08,164 p=7573 u=vagrant |  [DEPRECATION WARNING]: Using bare variables is deprecated. Update your playbooks so that the environment value uses the full variable syntax 
+('{{content_check}}').
+This feature will be removed in a future release. Deprecation warnings can be disabled by setting 
+deprecation_warnings=False in ansible.cfg.
+2016-12-04 15:29:08,178 p=7573 u=vagrant |  [DEPRECATION WARNING]: Using bare variables is deprecated. Update your playbooks so that the environment value uses the full variable syntax 
+('{{content_check}}').
+This feature will be removed in a future release. Deprecation warnings can be disabled by setting 
+deprecation_warnings=False in ansible.cfg.
+2016-12-04 15:29:08,244 p=7573 u=vagrant |  skipping: [vm1] => (item={u'host': u'localhost', u'cont': u'<img src'}) 
+2016-12-04 15:29:08,254 p=7573 u=vagrant |  skipping: [vm2] => (item={u'host': u'localhost', u'cont': u'<img src'}) 
+2016-12-04 15:29:08,270 p=7573 u=vagrant |  PLAY RECAP *********************************************************************
+2016-12-04 15:29:08,271 p=7573 u=vagrant |  local                      : ok=6    changed=0    unreachable=0    failed=0   
+2016-12-04 15:29:08,271 p=7573 u=vagrant |  vm1                        : ok=14   changed=9    unreachable=0    failed=0   
+2016-12-04 15:29:08,272 p=7573 u=vagrant |  vm2                        : ok=13   changed=9    unreachable=0    failed=0   

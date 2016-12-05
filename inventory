@@ -1,0 +1,9 @@
+local ansible_connection=local
+vm1 ansible_ssh_user=vagrant ansible_ssh_host=10.0.0.201 
+vm2 ansible_ssh_user=vagrant ansible_ssh_host=10.0.0.202 
+[lb]
+local
+
+[website]
+vm1
+vm2

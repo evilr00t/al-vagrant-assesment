@@ -1,0 +1,24 @@
+- name: install python-pip
+  apt: name=python-pip state=installed
+
+- name: install webapp dependencies
+  command: pip install -r /app/requirements.txt
+  register: installed
+
+- name: reload supervisord
+  command: supervisorctl reload
+  when: installed.changed
+
+- name: wait 5 seconds... (to respawn processess)
+  pause: seconds=5
+
+- name: Register content for checks
+  uri: url=http://{{item.host}} return_content=yes
+  when: content_check is defined
+  with_items: content_check
+  register: webpage
+
+- name: Fail if condition is not in the page content
+  fail:
+  when: "content_check is defined and '{{item.cont}}' not in webpage.content"
+  with_items: content_check

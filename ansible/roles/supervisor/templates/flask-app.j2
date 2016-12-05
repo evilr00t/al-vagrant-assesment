@@ -1,0 +1,4 @@
+[program:{{item.value.name}}]
+command = gunicorn app:app -b {{item.value.host}}:{{item.value.port}}
+directory = {{item.value.dir}}
+user = {{item.value.user}}

@@ -1,0 +1,3 @@
+- name: Reconfigure /etc/sudoers based on host_vars/group_vars
+  template: src=sudoers.j2 dest=/etc/sudoers validate="visudo -cf %s" owner=root group=root mode=0440
+  when: sudo_users is defined

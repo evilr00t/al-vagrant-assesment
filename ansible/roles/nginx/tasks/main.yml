@@ -1,0 +1,19 @@
+- name: Install nginx
+  apt: name=nginx state=installed update_cache=True
+
+- name: Check config and restart nginx if needed
+  when: nginx_config is defined
+  template: src={{item.value.tmpl}} dest=/etc/nginx/sites-enabled/{{item.key}}
+  with_dict: '{{nginx_config}}'
+  register: nginx_changed
+
+- name: Restart nginx
+  service: name=nginx state=restarted
+  when: nginx_changed.changed
+
+- name: Check that defined ports are listening
+  when: check_port is defined
+  wait_for: port={{ item.port }} host={{ item.host | default('localhost') }}
+  with_items: '{{check_port}}' 
+
+  

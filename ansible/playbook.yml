@@ -1,0 +1,14 @@
+---
+- hosts: all
+  roles:
+    - sudo
+
+- hosts: lb
+  roles:
+    - nginx 
+
+- hosts: website
+  roles:
+    - nginx
+    - supervisor
+    - webapp

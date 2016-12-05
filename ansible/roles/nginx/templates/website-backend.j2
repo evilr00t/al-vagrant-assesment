@@ -1,0 +1,13 @@
+# {{ ansible_managed }}
+server {
+	listen 80 {{ item.value.listen_ip }};
+
+	# Make site accessible from http://localhost/
+	server_name {{ item.value.virhost }};
+
+	location / {
+		proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+		proxy_pass http://{{item.value.backend_host}}:{{item.value.backend_port}};
+	}
+}
