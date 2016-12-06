@@ -1,7 +1,0 @@
-nginx_config:
-  default:
-    tmpl: website-backend.j2
-    backend_host: localhost
-    listen_ip: default_server
-    virhost: localhost  
-    backend_port: 5000

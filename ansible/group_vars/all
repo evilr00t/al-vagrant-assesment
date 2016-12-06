@@ -1,6 +1,3 @@
 sudo_users:
   - { name: '%admin' }
   - { name: 'vagrant', nopasswd: yes }
-
-check_port:
-  - { port: 80 }

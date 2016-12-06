@@ -9,6 +9,6 @@
 
 - hosts: website
   roles:
-    - nginx
     - supervisor
     - webapp
+    - nginx

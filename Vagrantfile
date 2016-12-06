@@ -64,9 +64,9 @@ Vagrant.configure("2") do |config|
   # Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the
   # documentation for more information about their specific syntax and use.
  
- 	config.ssh.insert_key = false
-	config.vm.provision "file",  source: "pubkey", destination: "/home/vagrant/.ssh/pubkey.pub"
-  config.vm.provision "shell", inline: "cat /home/vagrant/.ssh/pubkey.pub >> /home/vagrant/.ssh/authorized_keys"
+ 	#config.ssh.insert_key = false
+	#config.vm.provision "file",  source: "pubkey", destination: "/home/vagrant/.ssh/pubkey.pub"
+  #config.vm.provision "shell", inline: "cat /home/vagrant/.ssh/pubkey.pub >> /home/vagrant/.ssh/authorized_keys"
 	#config.ssh.public_key_path = "pubkey"
 	#config.ssh.private_key_path = "privkey"
 
@@ -85,8 +85,8 @@ config.vm.define "lb1" do |lb|
      export DEBIAN_FRONTEND=noninteractive
      apt-get update -qq
      apt-get install python-dev python-pip build-essential libssl-dev libffi-dev -qq -y --no-install-recommends
-     #latest 2.1 branch...
-     pip install ansible==2.1.3
+		 #latest 2.1.3 branch...
+		 pip install ansible==2.1.3
    SHELL
   lb.vm.synced_folder "ansible", "/ansible"
 
