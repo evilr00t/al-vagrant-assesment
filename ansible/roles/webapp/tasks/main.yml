@@ -11,4 +11,3 @@
 
 - name: wait 5 seconds... (to respawn processess)
   pause: seconds=5
-

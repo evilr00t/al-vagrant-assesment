@@ -12,3 +12,8 @@
     - supervisor
     - webapp
     - nginx
+  post_tasks:
+    - name: check content
+      local_action: command bash /ansible/roles/webapp/files/check_content.sh {{item.host}} {{item.cont}}
+      with_items: content_check
+
