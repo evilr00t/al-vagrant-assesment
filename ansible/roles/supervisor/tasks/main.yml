@@ -1,7 +1,9 @@
-- name: Install supervisor
-  apt: name=supervisor state=installed
+- block:
+  - name: Install supervisor
+    apt: name=supervisor state=installed
 
-- name: Configure supervisor
-  template: src={{item.key}}.j2 dest=/etc/supervisor/conf.d/{{item.value.name}}.conf
-  with_dict: supervisord
-  when: supervisord is defined
+  - name: Configure supervisor
+    template: src={{item.key}}.j2 dest=/etc/supervisor/conf.d/{{item.value.name}}.conf
+    with_dict: supervisord
+    when: supervisord is defined
+  when: supervisor_configure | bool
